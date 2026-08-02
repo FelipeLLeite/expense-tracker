@@ -1,7 +1,10 @@
+/*
+Copyright © 2026 Felpe Leite <EMAIL ADDRESS>
+*/
 package main
 
-import "fmt"
+import "github.com/FelipeLLeite/expense-tracker/cmd"
 
 func main() {
-	fmt.Println("Hello felipe")
+	cmd.Execute()
 }
