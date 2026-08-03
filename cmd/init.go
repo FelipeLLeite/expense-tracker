@@ -4,10 +4,7 @@ Copyright © 2026 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"context"
-	"database/sql"
 	"fmt"
-	"log"
 	"log/slog"
 	"os"
 
@@ -44,39 +41,5 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// initCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-}
-
-func connect() {
-	// Connect to DuckDB using '[database/sql.Open]'.
-	db, err := sql.Open("duckdb", "?access_mode=READ_WRITE")
-	defer func() {
-		if err = db.Close(); err != nil {
-			log.Fatalf("failed to close the database: %s", err)
-		}
-	}()
-
-	if err != nil {
-		log.Fatalf("failed to open connection to duckdb: %s", err)
-	}
-
-	ctx := context.Background()
-
-	createStmt := `CREATE table users(name VARCHAR, age INTEGER)`
-	_, err = db.ExecContext(ctx, createStmt)
-	if err != nil {
-		log.Fatalf("failed to create table: %s", err)
-	}
-
-	insertStmt := `INSERT INTO users(name, age) VALUES (?, ?)`
-	res, err := db.ExecContext(ctx, insertStmt, "Marc", 30)
-	if err != nil {
-		log.Fatalf("failed to insert users: %s", err)
-	}
-
-	rowsAffected, err := res.RowsAffected()
-	if err != nil {
-		log.Fatal("failed to get number of rows affected")
-	}
-
-	fmt.Printf("Inserted %d row(s) into users table", rowsAffected)
+	initCmd.Flags().Int("userID", -1, "The userID, which it will be use to initialize the Id to extrac all information about the user expenses.")
 }
