@@ -1,7 +1,8 @@
+// Package models that provides the object models for the CLI application
 package models
 
 type User struct {
-	Name     string    `json:"name"`
-	ID       int       `json:"id"`
+	ID       int64     `json:"id"`
+	UserName string    `json:"userName"`
 	Expenses []Expense `json:"expenses"`
 }

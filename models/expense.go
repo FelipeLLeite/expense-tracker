@@ -1,3 +1,4 @@
+// Package models that provides the object models for the CLI application
 package models
 
 import (
